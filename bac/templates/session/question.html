@@ -116,6 +116,13 @@
                 }
                 return ret;
             },
+            currentSolutionAvailable(){
+                return this.currentQuestionIndex < this.questions.length &&
+                    this.currentQuestion.correctAnswer.length > 0;
+            },
+            testFinished(){
+                return this.currentQuestionIndex + 1 >= this.questions.length;
+            },
             multiAnswers(){
                 return this.currentQuestion.multi || 
                     this.currentQuestion.correctAnswer.length > 1;
@@ -155,22 +162,33 @@
                     value => document.getElementById(`Answer${value}`).checked
                 );
                 this.answers.push(this.userAnswer);
-                if (this.checkAnswer()) {
-                    this.score += 1;
+                if(this.currentSolutionAvailable()) {
+                    if (this.checkAnswer()) {
+                        this.score += 1;
+                    }
+                    console.log(`Score: ${this.score}`)
+                    setTimeout(() => {
+                        if (this.testFinished()) {
+                            this.sendAnswers()
+                        } else {
+                            this.reset()
+                        }
+                    }, 500);
+                } else {
+                    if (this.testFinished()) {
+                            this.sendAnswers()
+                        } else {
+                            this.reset()
+                        }
                 }
-                console.log(`Score: ${this.score}`)
-                setTimeout(() => {
-                    if (this.currentQuestionIndex + 1 >= this.questions.length) {
-                        this.sendAnswers()
-                    } else {
-                        for(index = 0; index < this.currentQuestion.choices.length;++index) {
+            },
+            reset(){
+                for(index = 0; index < this.currentQuestion.choices.length;++index) {
                             document.getElementById(`Answer${index}`).checked = false;
                         }
                         this.currentQuestionIndex += 1;
                         this.answered = false;
                         this.userAnswer = null;
-                    }
-                }, 500);
             },
             sendAnswers(){
                 var formData = new FormData();

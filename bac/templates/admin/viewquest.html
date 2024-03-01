@@ -38,10 +38,10 @@
                                     <button type="button" data-bs-target="{{'#carousel' ~ loop.index}}" :data-bs-slide-to="index-1" :aria-label="`Slide ${index}`" :class="index === 1 && 'active'" :aria-current="index === 1 && 'true'"></button>
                                 </template>
                             </div>
-                            <div class="carousel-inner card-img-top">
+                            <div class="carousel-inner">
                                 <template x-for="(image,index) in images">
                                 <div class="carousel-item" :class="index === 0 && 'active'">
-                                    <img :src="image.path" class="d-block mx-auto img-fluid" alt="" width="300" height="200" loading="lazy">
+                                    <img :src="image.path" class=" card-img-top d-block mx-auto img-fluid" alt="" width="300" height="200" loading="lazy">
                                 </div>
                                 </template>
                             </div>

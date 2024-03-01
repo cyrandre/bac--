@@ -22,7 +22,6 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
 
         error = None
         if not username:
@@ -32,6 +31,7 @@ def register():
 
         profile = username=="admin"
         if error is None:
+            db = get_db()
             try:
                 db.execute(
                     "INSERT INTO user (username,password,profile) VALUES (?,?,?)",
@@ -41,23 +41,26 @@ def register():
             except db.IntegrityError:
                 error = f"User {username} is already registered"
             else:
-                return redirect(url_for('auth.login'))
-        #flash(error)
+                return redirect(url_for('auth.login'),code=307)
+        if error:
+            print(error)
+            #flash(error)
     return render_template('auth/register.html')
 
 @bp.route('/login',methods=('POST',))
 def login():
     username = request.form['username']
     password = request.form['password']
-    db = get_db()
-    
-    error = None
+
+    db = get_db()    
     user = db.execute(
         "SELECT * FROM user WHERE username = ?",(username,)        
     ).fetchone()
 
+    error = None
     if user is None:
-        return redirect(url_for('auth.register'))
+        #TODO should be removed when the register page is created
+        return redirect(url_for('auth.register'),code=307)
         error = 'Incorrect username'
     elif not check_password_hash(user['password'],password):
         error = 'Incorrect password'
@@ -67,10 +70,9 @@ def login():
         session['user_id'] = user['id']
     else:
         print(error)
-    #flash(error)
+        #flash(error)
     return redirect(url_for('index'))
     
-
 @bp.route('/logout')
 def logout():
     session.clear()

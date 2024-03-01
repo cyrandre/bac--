@@ -23,12 +23,15 @@ def index():
 
 @bp.route('/start',methods=('GET',))
 def start():
+    training = True #TODO should be in the user's profile
     questions = get_questions() 
+    if len(questions) == 0:
+        return redirect(url_for('session.index'))
     session['score'] = 0
     session['solutions'] = [q['solution'] for q in questions]    
-    # Pour une version test au lieu de training
-    # for question in questions:
-    #     del question['solution']    
+    if not training:
+        for question in questions:
+            del question['solution']    
     return render_template('session/question.html',questions=questions)
 
 @bp.route('/answer',methods=('GET','POST',))
@@ -50,7 +53,7 @@ def answer():
                 if check_answer(answer,solution):
                     sc += 1            
             if score > 0 and sc != score:
-                print("Bad score") 
+                print("Bad score",sc,score) 
             score = sc
         else:
             print(answers)
