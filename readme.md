@@ -34,7 +34,9 @@ Le site est visible à l'adresse: http://127.0.0.1:5000
 Lors de la première utilisation, la base de données est vide. Il n'y a donc aucune question ni utilisateur
 enregistré.
 ### Enregistrement de l'administrateur
-La connexion ou l'enregistrement d'un utilisateur se fait en cliquant sur l'icône en haut à droite de la page d'acceuil
+La connexion ou l'enregistrement d'un utilisateur se fait en cliquant sur l'icône en haut à droite de la page d'acceuil.
+
+![alt text](https://github.com/cyrandre/bac--/blob/main/screenshots/user.png)
 
 Pour créer des questions, il faut s'enregistrer en tant qu'administateur. Pour cela, il faut (pour l'instant) s'enregistrer en tant qu'_admin_
 avec le mot de passe de son choix. Attention, un seul administateur est autorisé. Une fois celui-ci enregistré, il n'est pas possible de changer
@@ -53,3 +55,12 @@ La page d'ajout et d'édition des questions permets de modifier les éléments s
 
 Pour enregistrer une question, il faut a _minima_ que le titre et une solution soient fournis.
 Les images sont ajoutées par _drag and drop_.
+## Screenshots
+__Page d'accueil__
+![alt text](https://github.com/cyrandre/bac--/blob/main/screenshots/home.png)
+__Question__
+![alt text](https://github.com/cyrandre/bac--/blob/main/screenshots/question.png)
+__Visualisation de toutes les questions__
+![alt text](https://github.com/cyrandre/bac--/blob/main/screenshots/vue_questions.png)
+__Edition d'une question__
+![alt text](https://github.com/cyrandre/bac--/blob/main/screenshots/edition_question.png)
