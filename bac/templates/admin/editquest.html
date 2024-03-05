@@ -162,12 +162,12 @@
             },
             submit(){
                 const data = this.data()
-                var formData = new FormData()
+                let formData = new FormData()
 
                 for(const [key,value] of Object.entries(data)) {
                     formData.append(key,value)
                 }
-                var count = 0
+                let count = 0
                 for(image of this.images) {
                     const name = `image${count++}`                                        
                     if(image.file != null){

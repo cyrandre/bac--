@@ -140,7 +140,7 @@
                 return this.currentQuestion.correctAnswer.includes(index)
             },
             checkAnswer(){
-                var check = true;
+                let check = true;
                 this.userAnswer.forEach(element => {
                     if(!this.currentQuestion.correctAnswer.includes(element))
                         check = false;
@@ -157,7 +157,7 @@
                 if (this.answered) return;
                 this.answered = true;
 
-                let length = this.currentQuestion.choices.length
+                const length = this.currentQuestion.choices.length
                 this.userAnswer = [...Array(length).keys()].filter(
                     value => document.getElementById(`Answer${value}`).checked
                 );
@@ -191,7 +191,7 @@
                         this.userAnswer = null;
             },
             sendAnswers(){
-                var formData = new FormData();
+                let formData = new FormData();
                 if(this.solutionAvailable()){
                     formData.append('score',this.score);
                 }
